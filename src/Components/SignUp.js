@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
+import UserContext from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
-const SignUp=({setToken})=>{
+const SignUp=()=>{
+    const {setToken}=useContext(UserContext);
+    const navigate=useNavigate();
     const [user, setUser]=useState({
         name:"",
         email:"",
@@ -31,6 +35,8 @@ const SignUp=({setToken})=>{
     console.log("Status : ",response.status);
     setMessage(response.data.message);
     setToken(response.data.data.token);
+    localStorage.setItem("token", JSON.stringify(response.data.data.token));
+    navigate("/home")
     setUser({
         name:"",
         email:"",

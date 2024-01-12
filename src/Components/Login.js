@@ -1,12 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
+import UserContext from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
-const Login=({setToken})=>{
+const Login=()=>{
+     const {setToken}=useContext(UserContext);
+
     const [user, setUser]=useState({
         email:"",
         password:"",
     });
    const[message, setMessage]=useState("");
+
+   const navigate=useNavigate();
 
  async function saveData(e){
     e.preventDefault();
@@ -21,6 +27,8 @@ const Login=({setToken})=>{
     console.log("Status : ",response.status);
     setMessage(response.data.message);
     setToken(response.data.data.token);
+    localStorage.setItem("token", JSON.stringify(response.data.data.token));
+     navigate("/home")
     setUser({
         email:"",
         password:"",
@@ -28,7 +36,7 @@ const Login=({setToken})=>{
    }
    catch(error){
     console.log("Error", error.response.data.message);
-    console.log("Status : ",error.response.status);
+    console.log("Status : " , error.response.status);
     setMessage(error.response.data.message);
    }
 }
