@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import axios from "axios";
 import UserContext from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 const SignUp=()=>{
     const {setToken}=useContext(UserContext);
     const navigate=useNavigate();
@@ -58,22 +58,26 @@ const SignUp=()=>{
     })
  }
     return (
-        <div>
+        <div className="all">
+            <div className="signup_card">
             <h1>Sign Up</h1>
             {
                 message && <h2>{message}</h2>
             }
-            <form onSubmit={saveData}>
-              <label htmlFor="name">Name</label><br/>
-              <input id="name" type="text" name="name" onChange={changeInput}/><br/>
-              <label htmlFor="email">Email</label><br/>
-              <input id="email" type="email" name="email" onChange={changeInput}/> <br/>
-              <label htmlFor="password">Password</label><br/>
-              <input id="password" type="password" name="password" onChange={changeInput}/><br/>
-              <label htmlFor="confirmPassword">Confirm Password</label><br/>
-              <input id="confirmPassword" type="password" name="confirmPassword" onChange={changeInput}/><br/>
+            <form className="signup_form" onSubmit={saveData}>
+              {/* <label htmlFor="name">Name</label><br/> */}
+              <input id="name" placeholder="Enter your name" type="text" name="name" onChange={changeInput}/><br/><br/>
+              {/* <label htmlFor="email">Email</label><br/> */}
+              <input id="email" placeholder="Enter email" type="email" name="email" onChange={changeInput}/> <br/><br/>
+              {/* <label htmlFor="password">Password</label><br/> */}
+              <input id="password" placeholder="Enter password" type="password" name="password" onChange={changeInput}/><br/><br/>
+              {/* <label htmlFor="confirmPassword">Confirm Password</label><br/> */}
+              <input id="confirmPassword" placeholder="Confirm password" type="password" name="confirmPassword" onChange={changeInput}/><br/>
               <button type="submit">submit</button>
             </form>
+            <p>User already exist? <Link to={"/"}>Login</Link></p>
+            </div>
+          
         </div>
     )
 }

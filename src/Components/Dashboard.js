@@ -10,7 +10,7 @@ const Dashboard=()=>{
  const navigate=useNavigate();
   // console.log(token);
  useEffect(()=>{
-  if(token==""){
+  if(token===""){
     let localToken = localStorage.getItem("token");
   if(localToken===undefined){
     navigate("/");
@@ -22,7 +22,7 @@ const Dashboard=()=>{
  },[token]);
 
   useEffect(()=>{
-    if(token!=""){
+    if(token!==""){
       getJoke();
     }
   },[token])
@@ -32,7 +32,9 @@ const Dashboard=()=>{
         const response=await axios.delete("https://instagram-express-app.vercel.app/api/auth/logout",{
           headers:{
             "authorization":`Bearer ${token}`
-        }})
+        }
+      });
+      console.log(response.data);
         alert("Logout Succesfully");
         localStorage.removeItem("token");
         setToken("");
@@ -53,7 +55,7 @@ const Dashboard=()=>{
                 "authorization":`Bearer ${token}`
             }
         }).then(res=>{
-            console.log("joke", res.data.data.message);
+            // console.log("joke", res.data.data.message);
             setJoke(res.data.data.message);
             setName(res.data.data.user.name);
         })

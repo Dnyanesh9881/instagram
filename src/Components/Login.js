@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import axios from "axios";
 import UserContext from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Login=()=>{
      const {setToken}=useContext(UserContext);
@@ -48,18 +49,23 @@ const Login=()=>{
     })
  }
     return (
-        <div>
+            <div className="login all">
+
+            <div className="login_card">
             <h1>Login</h1>
             {
                 message && <h2>{message}</h2>
             }
-            <form onSubmit={saveData}>
-              <label htmlFor="lEmail">Email</label><br/>
-              <input id="lEmail" type="email" name="email" onChange={changeInput}/> <br/>
-              <label htmlFor="lPassword">Password</label><br/>
-              <input id="lPassword" type="password" name="password" onChange={changeInput}/><br/>
+            <form className="login_form" onSubmit={saveData}>
+              {/* <label htmlFor="lEmail">Email</label><br/> */}
+              <input id="lEmail" type="email" placeholder="Enter Email" name="email" onChange={changeInput}/> <br/><br/>
+              {/* <label htmlFor="lPassword">Password</label><br/> */}
+              <input id="lPassword" type="password" placeholder="Enter Password" name="password" onChange={changeInput}/><br/>
               <button type="submit">submit</button>
             </form>
+            <p>Don't have an account? <Link to={"/signup"}>signup</Link></p>
+            </div>
+           
         </div>
     )
 }
